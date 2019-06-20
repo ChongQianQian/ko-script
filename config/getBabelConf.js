@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-18 17:40:29
+ * @LastEditTime: 2019-06-20 10:46:35
  */
 
 
@@ -51,7 +51,6 @@ module.exports = () => {
         ]),
         plugins: resolvePlugin([
             // Stage 0
-            "babel-plugin-transform-remove-strict-mode",
             '@babel/plugin-proposal-function-bind',
             // Stage 1
             '@babel/plugin-proposal-export-default-from',

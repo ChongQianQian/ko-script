@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-18 17:03:29
+ * @LastEditTime: 2019-06-20 10:45:47
  */
 const path = require('path');
 const getBabelConf = require('./getBabelConf');
@@ -18,6 +18,7 @@ let dependencies = Object.keys(pkg.dependencies) || [];
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const BABEL_LOADER = require.resolve('babel-loader');
 const deepAssign = require('deep-assign');
 const getUserConf = require('./getUserConf');
@@ -73,10 +74,15 @@ module.exports=function(s){
         },
         optimization: {
           minimizer: [
-            new UglifyJsPlugin({
+            // new UglifyJsPlugin({
+            //   cache: true,
+            //   parallel: true,
+            //   sourceMap: false // set to true if you want JS source maps
+            // }),
+            new TerserPlugin({
               cache: true,
               parallel: true,
-              sourceMap: false // set to true if you want JS source maps
+              sourceMap: false
             }),
             new OptimizeCSSAssetsPlugin({})
           ]
