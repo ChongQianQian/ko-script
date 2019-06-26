@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 11:57:58
+ * @LastEditTime: 2019-06-20 16:12:13
  */
 
 
@@ -50,7 +50,7 @@ module.exports = (entry) => {
   }),
   ];
   if(process.env.NODE_ENV=='production'){
-    plugins.push(new CleanWebpackPlugin(cleanPath, cleanOpt));
+    plugins.push(new CleanWebpackPlugin(cleanPath,cleanOpt));
   }
   //引入 dll 文件
   Array.prototype.push.apply(plugins, getDllPlugins());

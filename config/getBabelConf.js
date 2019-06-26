@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-20 10:46:35
+ * @LastEditTime: 2019-06-20 16:48:00
  */
 
 
@@ -35,16 +35,8 @@ module.exports = () => {
                 {
                     modules: false,
                     useBuiltIns:'entry',
-                    targets: {
-                        browsers: [
-                            'last 2 versions',
-                            'Firefox ESR',
-                            '> 1%',
-                            'ie >= 9',
-                            'iOS >= 8',
-                            'Android >= 4.1'
-                        ],
-                    },
+                    "corejs": "3", 
+
                 },
             ],
             '@babel/preset-react',
