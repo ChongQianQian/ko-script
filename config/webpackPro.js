@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 11:19:46
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-18 17:00:58
+ * @LastEditTime: 2019-06-28 16:48:33
  */
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpackMerge = require('webpack-merge');
@@ -41,8 +41,7 @@ module.exports = function getWebpackPro(program) {
     new CopyWebpackPlugin([
       { from: paths.appDll,to:paths.appDist+'/dll'},
     ]),
-    new ParallelUglifyPlugin(Object.assign({
-       cacheDir: '.cache/'},uglifyOpt)),
+    new ParallelUglifyPlugin(uglifyOpt),
     new OptimizeCSSAssetsPlugin({}),
     new webpack.optimize.SplitChunksPlugin({
       // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；

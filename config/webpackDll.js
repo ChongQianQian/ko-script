@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-26 15:05:20
+ * @LastEditTime: 2019-06-28 16:48:37
  */
 const path = require('path');
 const getBabelConf = require('./getBabelConf');
@@ -46,12 +46,18 @@ module.exports=function(s){
         module: {
           rules: [
             {
-              test: /\.jsx|.js?$/,
+              test: /\.(js|jsx|mjs)$/,
               exclude: /node_modules/,
               loader: BABEL_LOADER,
               options: deepAssign({}, babelConfig, {
-                  cacheDirectory: true
+                cacheDirectory: true
               }),
+              // options: {
+              //   babelrc: false,
+              //   presets: [require.resolve('babel-preset-react-app')],
+              //   // @remove-on-eject-end
+              //   compact: true,
+              // },
             }
           ]
         },

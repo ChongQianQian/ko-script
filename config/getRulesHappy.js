@@ -30,7 +30,13 @@ module.exports = () => {
             loader: BABEL_LOADER,
             options: deepAssign({}, babelConfig, {
                 cacheDirectory: true
-            })
+              }),
+            // options: {
+            //   babelrc: false,
+            //   presets: [require.resolve('babel-preset-react-app')],
+            //   // @remove-on-eject-end
+            //   compact: true,
+            // },
         }]),
         // createHappyPlugin('happy-scss', [
         //     loaderType,
