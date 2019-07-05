@@ -5,16 +5,16 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-28 16:48:37
+ * @LastEditTime: 2019-07-05 15:38:04
  */
 const path = require('path');
-const getBabelConf = require('./getBabelConf');
+//const getBabelConf = require('./getBabelConf');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const paths = require('./defaultPaths');
 const pkg=require(paths.appPkg);
 const {formatBundle}=require('../util');
-let dependencies = Object.keys(pkg.dependencies) || [];
+const dependencies = Object.keys(pkg.dependencies) || [];
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
@@ -35,11 +35,11 @@ let cleanOpt = {
  * @Date: 2018-12-26 11:26:58
  */  
 module.exports=function(s){
- const babelConfig = getBabelConf();
  const userConfig = getUserConf();
  const {dll=[]}=userConfig;
  let splicModules=dll.length?dll:dependencies;
- //console.log(splicModules,'11212');
+ const babelConf=require.resolve('ko-babel-app');
+
  return {
         mode:"production", //process.env.NODE_ENV === 'production' ? 'production' : 'development',
         entry:formatBundle(splicModules,s),
@@ -49,15 +49,9 @@ module.exports=function(s){
               test: /\.(js|jsx|mjs)$/,
               exclude: /node_modules/,
               loader: BABEL_LOADER,
-              options: deepAssign({}, babelConfig, {
+              options: deepAssign({}, babelConf, {
                 cacheDirectory: true
               }),
-              // options: {
-              //   babelrc: false,
-              //   presets: [require.resolve('babel-preset-react-app')],
-              //   // @remove-on-eject-end
-              //   compact: true,
-              // },
             }
           ]
         },

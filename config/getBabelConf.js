@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2019-07-02 17:10:09
+ * @LastEditTime: 2019-07-05 15:37:45
  */
 
 
@@ -30,15 +30,12 @@ module.exports = () => {
     const path = require('path');
     const absoluteRuntime=path.dirname(require.resolve('@babel/runtime/package.json'));
     return {
+        
         babelrc: false,
         presets: resolvePlugin([
             [
                 '@babel/preset-env',
                 {
-                    //modules: false,
-                    //useBuiltIns:'entry',
-                   // "corejs": "3", 
-                   // exclude: ['transform-typeof-symbol'],
                     ignoreBrowserslistConfig: true,
                     // If users import all core-js they're probably not concerned with
                     // bundle size. We shouldn't rely on magic to try and shrink it.
@@ -50,6 +47,7 @@ module.exports = () => {
                 },
             ],
             ['@babel/preset-react'],
+            ['@babel/preset-typescript']
         ]),
         plugins: resolvePlugin([
             // Stage 0
@@ -109,23 +107,6 @@ module.exports = () => {
                     "useESModules": false
                 }
             ],
-            // [
-            //     require('@babel/plugin-transform-runtime').default,
-            //     {
-            //       corejs: false,
-            //       helpers: areHelpersEnabled,
-            //       regenerator: true,
-            //       // https://babeljs.io/docs/en/babel-plugin-transform-runtime#useesmodules
-            //       // We should turn this on once the lowest version of Node LTS
-            //       // supports ES Modules.
-            //       useESModules: isEnvDevelopment || isEnvProduction,
-            //       // Undocumented option that lets us encapsulate our runtime, ensuring
-            //       // the correct version is used
-            //       // https://github.com/babel/babel/blob/090c364a90fe73d36a30707fc612ce037bdbbb24/packages/babel-plugin-transform-runtime/src/index.js#L35-L42
-            //       absoluteRuntime: absoluteRuntimePath,
-            //     },
-            //   ],
-    
             ["babel-plugin-import", { "libraryName": "antd", "libraryDirectory": "lib"}, "ant"],
             ["babel-plugin-import", { "libraryName": "ant-mobile", "libraryDirectory": "lib"}, "ant-mobile"]
             ["babel-plugin-import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"]
