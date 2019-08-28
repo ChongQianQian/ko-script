@@ -13,7 +13,8 @@ program
   .command('build', 'build project')
   .command('dev', 'start server')
   .command('dll', 'build dll')
-  .command('preview', 'view app')
+  .command('preview', 'browser app')
+  .command('install', 'install commponent')
   .command('move', 'move to gh-pages')
   .command('swagger','generate swagger api');
   program.parse(process.argv);

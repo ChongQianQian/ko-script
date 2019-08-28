@@ -1,4 +1,4 @@
-## ko-script v2.2.8
+## ko-script v3.5.0
 
 [![npm version](https://img.shields.io/npm/v/ts-loader.svg)](https://www.npmjs.com/package/ko-script)
 [![Linux Build Status](https://travis-ci.org/TypeStrong/ts-loader.svg?branch=master)](https://npmjs.org/package/ko-script)
@@ -32,6 +32,8 @@ $ yarn add ko-script --dev
 6. ko move  默认移动文件(可配置)
 
 7. ko swagger 生成swagger接口文件(可选js/ts),用户自定义请放在restful.js
+
+9. ko install 安装已发布npm包组件或者区块
 
 8. ko [xx] -h 查看相关命令参数使用
 ```
@@ -105,7 +107,9 @@ module.exports = (context) => {
 ```
 
 ### Tips
-> react支持ts，并且ts，tsx和js，jsx可以共存，但是如果使用es6新语法，诸如 await，箭头函数，const等，需要将文件改为ts或者tsx
+> v3版本以上仅支持babel-loader8;
+
+> react支持ts，并且ts，tsx和js，jsx可以共存，但是如果使用es6新语法，诸如 await，箭头函数，const等，需要将文件改为ts或者tsx;
 
 > 文件路径别名问题，如果使用tsx，webpack中别名配置将会报错，需要在tsconfig中配置path别名
 
