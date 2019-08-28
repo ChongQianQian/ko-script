@@ -5,16 +5,14 @@
  * @Author: Charles
  * @Date: 2018-12-11 11:19:46
  * @LastEditors: Charles
- * @LastEditTime: 2019-08-28 11:17:47
+ * @LastEditTime: 2019-08-28 14:02:31
  */
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const paths=require('./defaultPaths')
 const webpack=require('webpack');
 const getWebpackBase = require('./webpackBase');
-const colors=require('colors');
 const TerserPlugin = require('terser-webpack-plugin');
 
 /**
@@ -28,35 +26,26 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = function getWebpackPro(program) {
   const baseConfig = getWebpackBase(program);
   baseConfig.optimization={
-    // runtimeChunk: {
-    //   name: 'runtime'
-    // },
     moduleIds: 'hashed',
     minimizer: [
       new TerserPlugin({
         cache: true,
         parallel: true,
-        sourceMap: false, // Must be set to true if using source-maps in productio
+        sourceMap: false,
+        //extractComments: true,
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
       }),
      new OptimizeCSSAssetsPlugin({}),
     ]
   };
-  const uglifyConf={output: {
-    comments: false,
-    beautify: false
-  },
-  compress: {
-    warnings: false,
-    drop_console: true,
-    collapse_vars: true,
-    reduce_vars: true
-  }}
-  const uglifyOpt=program.es6?{uglifyES:uglifyConf}:{uglifyJS:uglifyConf};
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       { from: paths.appDll,to:paths.appDist+'/dll'},
     ]),
-    new ParallelUglifyPlugin(uglifyOpt),
     new webpack.optimize.SplitChunksPlugin({
       // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；
       chunks: 'async',
@@ -80,13 +69,6 @@ module.exports = function getWebpackPro(program) {
           test: /[\\/]node_modules[\\/]antd[\\/]/,
           chunks: 'initial',
         },
-        lodash: {
-          name: 'lodash',
-          test: /[\\/]node_modules[\\/]lodash[\\/]/,
-          chunks: 'initial',
-          // 默认组的优先级为负数，以允许任何自定义缓存组具有更高的优先级（默认值为0）
-          priority: -10
-        },
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name(module, chunks, cacheGroupKey) {
@@ -94,12 +76,19 @@ module.exports = function getWebpackPro(program) {
             return `${cacheGroupKey}-${moduleFileName}`;
           },
           chunks: 'all'
-        }
-        // default: {
-        //   minChunks: 2,
-        //   priority: -20,
-        //   reuseExistingChunk: true
-        // },
+        },
+        lodash: {
+          name: 'lodash',
+          test: /[\\/]node_modules[\\/]lodash[\\/]/,
+          chunks: 'initial',
+          // 默认组的优先级为负数，以允许任何自定义缓存组具有更高的优先级（默认值为0）
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        },
       }
     }),
   )
