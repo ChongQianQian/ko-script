@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 11:19:46
  * @LastEditors: Charles
- * @LastEditTime: 2019-08-28 14:02:31
+ * @LastEditTime: 2019-09-04 11:52:43
  */
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpackMerge = require('webpack-merge');
@@ -49,7 +49,7 @@ module.exports = function getWebpackPro(program) {
     new webpack.optimize.SplitChunksPlugin({
       // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；
       chunks: 'async',
-      // （默认值：30000）块的最小大小
+      // （默认值：30000s）块的最小大小
       minSize: 30000,
       maxSize:600000,
       // （默认值：1）分割前共享模块的最小块数
@@ -68,14 +68,6 @@ module.exports = function getWebpackPro(program) {
           name: 'antd',
           test: /[\\/]node_modules[\\/]antd[\\/]/,
           chunks: 'initial',
-        },
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module, chunks, cacheGroupKey) {
-            const moduleFileName = module.identifier().split('/').reduceRight(item => item);
-            return `${cacheGroupKey}-${moduleFileName}`;
-          },
-          chunks: 'all'
         },
         lodash: {
           name: 'lodash',

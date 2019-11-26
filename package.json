@@ -1,6 +1,6 @@
 {
   "name": "ko-script",
-  "version": "3.8.6",
+  "version": "3.8.9-alpha.0",
   "description": "this is cli",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,8 @@
     "scss",
     "antd",
     "swagger",
+    "createPage",
+    "createComp",
     "happypack",
     "webpackdll",
     "webpack",
@@ -87,7 +89,7 @@
     "style-loader": "^1.0.0",
     "ts-loader": "^6.0.4",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "^3.5.3",
+    "typescript": "^3.6.2",
     "url": "^0.11.0",
     "url-loader": "^2.1.0",
     "urllib": "^2.34.0",

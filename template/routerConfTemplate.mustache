@@ -1,0 +1,16 @@
+{{#importPackages}}
+{{&.}}
+{{/importPackages}}
+
+const routerConf = [
+  {{#confData}}
+  { 
+    path: '{{&linkPath}}',
+    layout: {{&layoutName}},
+    component: {{&compName}},
+    children:[],
+  }, 
+  {{/confData}}
+];
+
+export default routerConf;

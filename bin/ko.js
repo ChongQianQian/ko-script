@@ -16,7 +16,9 @@ program
   .command('preview', 'browser app')
   .command('install', 'install commponent')
   .command('move', 'move to gh-pages')
-  .command('swagger','generate swagger api');
+  .command('swagger','generate swagger api')
+  .command('createPage','create page and config router')
+  .command('createComp','create component');
   program.parse(process.argv);
 
 const proc = program.runningCommand;
